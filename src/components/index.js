@@ -1,0 +1,5 @@
+export { default as Header } from './Header/Header'
+export { default as DataTable } from './DataTable/DataTable'
+export { default as History } from './History/History'
+export { default as HistoryButton } from './common/HistoryButton/HistoryButton'
+export { default as InputSearch } from './common/InputSearch/InputSearch'

@@ -1,0 +1,46 @@
+table,
+th,
+td {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 6px 40px;
+    width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rdg-static-td {
+    /* display: inline-table; */
+}
+
+th {
+    background-color: rgba(60, 93, 210, 0.05);
+}
+
+td {
+    cursor: pointer;
+    position: relative;
+}
+
+.rdg-inline-input {
+    border: 2px solid var(--rdg-primary-color);
+    text-align: center;
+    line-height: 29px;
+    outline-color: var(--rdg-primary-color);
+    width: 100%;
+    font-size: 16px;
+}
+
+.rdg-cell-updated {
+    color: green;
+    font-size: 16px;
+    position: absolute;
+    right: 9px;
+    top: 9px;
+}

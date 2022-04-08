@@ -1,0 +1,1 @@
+export { default as PersonalInfoDashboard } from './PersonalInfoDashboard/PersonalInfoDashboard'

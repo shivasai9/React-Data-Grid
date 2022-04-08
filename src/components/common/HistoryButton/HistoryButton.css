@@ -1,0 +1,12 @@
+.rdg-history-button {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+    background-color: var(--rdg-primary-color);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    column-gap: 8px;
+    padding: 8px;
+}

@@ -1,0 +1,27 @@
+.rdg-personal-info-dashboard {
+    height: 92vh;
+    padding: 0 60px;
+}
+
+.rdg-page-heading {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 16px 0;
+}
+
+.rdg-personal-info-dashboard p {
+    font-size: 14px;
+}
+
+.rdg-view {
+    background-color: white;
+    padding: 20px 16px;
+    display: inline-block;
+}
+
+.rdg-view-row-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
