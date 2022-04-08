@@ -4,7 +4,9 @@ const initialAppState = {
     openHistory: false,
     tableData: [],
     historyData: [],
-    lastUpdatedCellId: ''
+    lastUpdatedCellId: '',
+    matchedRows: [],
+    searchValue: ''
 };
 
 const AppContext = createContext(initialAppState);
@@ -44,6 +46,26 @@ const getlatestTableData = (presentTableData, latestTableRow) => {
     localStorage.setItem('rdg-tableData', JSON.stringify(latestTableData));
     return latestTableData;
 }
+
+const getLatestMatchedRows = (latestTableData, searchValue) => {
+    if(searchValue === '') return [];
+
+    let latestMatchedRows = [];
+    latestTableData.forEach((row, index) => {
+        const rowValues = Object.values(row);
+        for (let rowVal of rowValues) {
+            const val = String(rowVal).toLowerCase();
+            const searchVal = searchValue.toLowerCase(); 
+            if(val?.includes(searchVal)) {
+                latestMatchedRows.push(index);
+                break;
+            }
+        }
+    })
+
+    return latestMatchedRows;
+}
+
 const appStateReducer = (state, action) => {
     switch (action.type) {
 
@@ -55,6 +77,13 @@ const appStateReducer = (state, action) => {
 
         case 'UPDATE_HISTORY_DATA':
             return { ...state, historyData: action.payload }
+
+        case 'UPDATE_SEARCH_VALUE_AND_MATCHED_ROWS':
+            return { 
+                 ...state,
+                 matchedRows: getLatestMatchedRows(state.tableData, action.payload), 
+                 searchValue: action.payload
+                }
 
         case 'UPDATE_HISTORY_AND_TABLE_DATA':
             const { historyData, tableData } = state;
@@ -95,6 +124,12 @@ const AppStateProvider = ({ children }) => {
             dispatch({
                 type: 'UPDATE_HISTORY_AND_TABLE_DATA',
                 payload: { historyItem, tableRow, lastUpdatedCellId }
+            })
+        },
+        updateSearchValueAndMatchedRows(searchValue) {
+            dispatch({
+                type: 'UPDATE_SEARCH_VALUE_AND_MATCHED_ROWS',
+                payload: searchValue
             })
         }
     };

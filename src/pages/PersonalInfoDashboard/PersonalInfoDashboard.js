@@ -6,9 +6,14 @@ import { useContext } from 'react';
 
 const PersonalInfoDashboard = () => {
     const { state: appState, actions } = useContext(AppContext);
-
+    
     const historyButtonOnclickHandler = () => {
         actions.updateOpenHistory();
+    }
+
+    const onInputSearchChangeHandler = (event) => {
+        const searchValue = event.target.value;
+        actions.updateSearchValueAndMatchedRows(searchValue);
     }
     
     return <div className='rdg-personal-info-dashboard'>
@@ -18,7 +23,7 @@ const PersonalInfoDashboard = () => {
         </div>
         <div className='rdg-view'>
             <div className='rdg-view-row-1'>
-                <InputSearch />
+                <InputSearch value={appState.searchValue} onChangeHandler={onInputSearchChangeHandler}/>
                 <HistoryButton onClickHandler={historyButtonOnclickHandler} />
             </div>
             <DataTable data={appState.tableData} />

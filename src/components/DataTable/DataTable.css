@@ -44,3 +44,12 @@ td {
     right: 9px;
     top: 9px;
 }
+
+.rdg-matched-row {
+    background-color: var(--rdg-primary-color);
+    color: white;
+}
+.rdg-not-matched-row {
+    background-color: white;
+    color: black;
+}

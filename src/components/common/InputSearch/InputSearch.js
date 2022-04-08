@@ -1,8 +1,8 @@
 import './InputSearch.css';
 
-const InputSearch = () => {
+const InputSearch = ({ value, onChangeHandler }) => {
     return <div className='rdg-input-search'>
-        <input placeholder={'Search for data...'} />
+        <input value={value} placeholder={'Search for data...'} onChange={onChangeHandler} />
         <i className="fa fa-search"></i>
     </div>
 }

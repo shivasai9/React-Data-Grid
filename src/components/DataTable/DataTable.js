@@ -7,12 +7,17 @@ const DataTable = ({ data }) => {
     const [previousInputVal, updatePreviousInputVal] = useState('');
     const [latestInputVal, updateLatestInputVal] = useState('');
     const { state, actions } = useContext(AppContext);
-    console.log('state.lastUpdatedCellId', state.lastUpdatedCellId)
+
     const inputChangeHandler = (latestVal) => {
         updateLatestInputVal(latestVal);
     }
 
     const onTableCellClickHandler = (rowNo, rowEl) => {
+        // reset all search results and search input
+        if (state.searchValue.length) {
+            actions.updateSearchValueAndMatchedRows('');
+        }
+
         const id = `${rowNo}-${rowEl[0]}`;
         updateSelectedCellId(id);
         updatePreviousInputVal(rowEl[1]);
@@ -49,7 +54,7 @@ const DataTable = ({ data }) => {
             </tr>
 
             {data.length ? data.map((row, rowIndex) => {
-                return <tr key={rowIndex}>{Object.entries(row).map((rowEl, colIndex) => {
+                return <tr key={rowIndex} className={`${state?.matchedRows?.includes(rowIndex) ? 'rdg-matched-row' : 'rdg-not-matched-row'}`}>{Object.entries(row).map((rowEl, colIndex) => {
                     return <React.Fragment key={colIndex}>
                         {selectedCellId !== `${rowIndex}-${rowEl[0]}` ? <td key={rowEl[0]} id={`${rowIndex}-${rowEl[0]}`}
                             onClick={() => onTableCellClickHandler(rowIndex, rowEl)}>
