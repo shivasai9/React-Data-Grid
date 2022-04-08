@@ -81,7 +81,12 @@ const appStateReducer = (state, action) => {
         case 'UPDATE_SEARCH_VALUE_AND_MATCHED_ROWS':
             return { 
                  ...state,
-                 matchedRows: getLatestMatchedRows(state.tableData, action.payload), 
+                 matchedRows: getLatestMatchedRows(state.tableData, action.payload)
+                }
+
+        case 'UPDATE_SEARCH_VALUE':
+            return { 
+                 ...state,
                  searchValue: action.payload
                 }
 
@@ -129,6 +134,12 @@ const AppStateProvider = ({ children }) => {
         updateSearchValueAndMatchedRows(searchValue) {
             dispatch({
                 type: 'UPDATE_SEARCH_VALUE_AND_MATCHED_ROWS',
+                payload: searchValue
+            })
+        },
+        updateSearchValue(searchValue) {
+            dispatch({
+                type: 'UPDATE_SEARCH_VALUE',
                 payload: searchValue
             })
         }

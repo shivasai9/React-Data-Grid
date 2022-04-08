@@ -1,21 +1,28 @@
 import './PersonalInfoDashboard.css';
 import { DataTable, HistoryButton, InputSearch, History } from '../../components';
 import { AppContext } from '../../providers';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
+import { useDebounce } from '../../hooks';
 
 
 const PersonalInfoDashboard = () => {
     const { state: appState, actions } = useContext(AppContext);
-    
+
     const historyButtonOnclickHandler = () => {
         actions.updateOpenHistory();
     }
 
     const onInputSearchChangeHandler = (event) => {
+        console.log('----------event-----', event)
+
         const searchValue = event.target.value;
+        console.log('---------------', searchValue)
         actions.updateSearchValueAndMatchedRows(searchValue);
     }
+
+    const debouncedOnInputSearchChangeHandler = useCallback(useDebounce(onInputSearchChangeHandler, 300), [])
     
+
     return <div className='rdg-personal-info-dashboard'>
         <div className='rdg-page-heading'>
             <h3>React Data grid</h3>
@@ -23,7 +30,10 @@ const PersonalInfoDashboard = () => {
         </div>
         <div className='rdg-view'>
             <div className='rdg-view-row-1'>
-                <InputSearch value={appState.searchValue} onChangeHandler={onInputSearchChangeHandler}/>
+                <InputSearch value={appState.searchValue} onChangeHandler={(event) => {
+                    actions.updateSearchValue(event.target.value);
+                    debouncedOnInputSearchChangeHandler(event);
+                }} />
                 <HistoryButton onClickHandler={historyButtonOnclickHandler} />
             </div>
             <DataTable data={appState.tableData} />
