@@ -12,7 +12,6 @@ const initialAppState = {
 const AppContext = createContext(initialAppState);
 
 const getLatestHistoryData = (presentHistoryData, latestHistoryItem) => {
-    console.log('presentHistoryData, latestHistoryItem', presentHistoryData, latestHistoryItem)
     const { date, rowNo, colNo, newValue, oldValue } = latestHistoryItem;
     const month = date.toLocaleString('default', { month: 'long' });
     const dateNo = date.getDate();
@@ -81,7 +80,8 @@ const appStateReducer = (state, action) => {
         case 'UPDATE_SEARCH_VALUE_AND_MATCHED_ROWS':
             return { 
                  ...state,
-                 matchedRows: getLatestMatchedRows(state.tableData, action.payload)
+                 matchedRows: getLatestMatchedRows(state.tableData, action.payload), 
+                 searchValue: action.payload
                 }
 
         case 'UPDATE_SEARCH_VALUE':

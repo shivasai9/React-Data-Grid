@@ -13,10 +13,7 @@ const PersonalInfoDashboard = () => {
     }
 
     const onInputSearchChangeHandler = (event) => {
-        console.log('----------event-----', event)
-
         const searchValue = event.target.value;
-        console.log('---------------', searchValue)
         actions.updateSearchValueAndMatchedRows(searchValue);
     }
 
